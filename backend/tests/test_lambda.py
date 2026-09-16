@@ -29,13 +29,25 @@ class TestLambdaFunction(unittest.TestCase):
 
         response = lambda_function.lambda_handler({}, None)
 
+        # HTTP response doğru mu?
         self.assertEqual(response["statusCode"], 200)
 
+        # Response body doğru mu?
         body = json.loads(response["body"])
-
         self.assertEqual(body["count"], 42)
 
-        mock_table.update_item.assert_called_once()
+        # DynamoDB update tam beklediğimiz parametrelerle mi çağrıldı?
+        mock_table.update_item.assert_called_once_with(
+            Key={"id": "visitor-count"},
+            UpdateExpression="ADD #count :increment",
+            ExpressionAttributeNames={
+                "#count": "count",
+            },
+            ExpressionAttributeValues={
+                ":increment": 1,
+            },
+            ReturnValues="UPDATED_NEW",
+        )
 
 
 if __name__ == "__main__":
