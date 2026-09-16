@@ -12,3 +12,8 @@ output "visitor_lambda_name" {
   description = "Lambda function handling visitor count requests"
   value       = aws_lambda_function.visitor_counter.function_name
 }
+
+output "visitor_api_url" {
+  description = "Public URL of the visitor counter API"
+  value       = "${aws_apigatewayv2_api.visitor_api.api_endpoint}/visitors"
+}
