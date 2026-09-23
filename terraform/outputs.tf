@@ -17,3 +17,18 @@ output "visitor_api_url" {
   description = "Public URL of the visitor counter API"
   value       = "${aws_apigatewayv2_api.visitor_api.api_endpoint}/visitors"
 }
+
+output "cloudfront_domain_name" {
+  description = "CloudFront domain serving the frontend"
+  value       = aws_cloudfront_distribution.frontend.domain_name
+}
+
+output "cloudfront_url" {
+  description = "Public HTTPS URL of the Cloud Resume frontend"
+  value       = "https://${aws_cloudfront_distribution.frontend.domain_name}"
+}
+
+output "cloudfront_distribution_id" {
+  description = "ID of the CloudFront distribution serving the frontend"
+  value       = aws_cloudfront_distribution.frontend.id
+}

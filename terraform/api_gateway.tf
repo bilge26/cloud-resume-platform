@@ -3,9 +3,19 @@ resource "aws_apigatewayv2_api" "visitor_api" {
   protocol_type = "HTTP"
 
   cors_configuration {
-    allow_origins = ["*"]
-    allow_methods = ["GET", "OPTIONS"]
-    allow_headers = ["content-type"]
+    allow_origins = [
+      "https://${aws_cloudfront_distribution.frontend.domain_name}",
+      "http://localhost:8000"
+    ]
+
+    allow_methods = [
+      "GET",
+      "OPTIONS"
+    ]
+
+    allow_headers = [
+      "content-type"
+    ]
   }
 
   tags = {
