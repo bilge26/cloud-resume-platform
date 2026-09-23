@@ -32,3 +32,8 @@ output "cloudfront_distribution_id" {
   description = "ID of the CloudFront distribution serving the frontend"
   value       = aws_cloudfront_distribution.frontend.id
 }
+
+output "terraform_state_bucket_name" {
+  description = "S3 bucket storing the remote Terraform state"
+  value       = aws_s3_bucket.terraform_state.bucket
+}

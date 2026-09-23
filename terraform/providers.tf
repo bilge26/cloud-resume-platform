@@ -12,6 +12,13 @@ terraform {
       version = ">= 2.0"
     }
   }
+  backend "s3" {
+    bucket       = "bilge-cloud-resume-tfstate-f299b7234b0c90b1c4f7cce723"
+    key          = "cloud-resume/terraform.tfstate"
+    region       = "eu-central-1"
+    encrypt      = true
+    use_lockfile = true
+  }
 }
 
 provider "aws" {
